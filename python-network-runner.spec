@@ -3,7 +3,7 @@
 %global ansible_role network-runner
 
 Name:           python-%{pypi_name}
-Version:        0.1.1
+Version:        0.1.5
 Release:        1%{?dist}
 Summary:        Abstraction and Python API for Ansible Networking
 
@@ -14,8 +14,9 @@ BuildArch:      noarch
 
 BuildRequires: ansible >= 2.6
 BuildRequires:  python3-devel
-BuildRequires:  python3dist(mock)
 BuildRequires:  python3dist(ansible-runner)
+BuildRequires:  python3dist(mock)
+BuildRequires:  python3dist(pytest)
 
 %description
 Network Runner is a set of ansible roles and python library that
@@ -60,8 +61,8 @@ rm -rf %{pypi_name}.egg-info
 install -d -m 755 %{buildroot}%{_sysconfdir}/ansible/roles
 mv etc/ansible/roles/%{ansible_role} %{buildroot}%{_sysconfdir}/ansible/roles
 
-# %%check
-# No tests yet exist upstream
+%check
+LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 
 %files -n python3-%{pypi_name}
 %license LICENSE
@@ -75,5 +76,8 @@ mv etc/ansible/roles/%{ansible_role} %{buildroot}%{_sysconfdir}/ansible/roles
 %{_sysconfdir}/ansible/roles/%{ansible_role}/
 
 %changelog
+* Tue Apr 2 2019 Dan Radez <dradez@redhat.com> - 0.1.5-1
+- Updated to 0.1.5
+- added %check
 * Wed Mar 20 2019 Dan Radez <dradez@redhat.com> - 0.1.1-1
 - Initial package.
