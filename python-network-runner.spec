@@ -3,7 +3,7 @@
 %global ansible_role network-runner
 
 Name:           python-%{pypi_name}
-Version:        0.1.5
+Version:        0.1.6
 Release:        1%{?dist}
 Summary:        Abstraction and Python API for Ansible Networking
 
@@ -76,8 +76,12 @@ LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 %{_sysconfdir}/ansible/roles/%{ansible_role}/
 
 %changelog
-* Tue Apr 2 2019 Dan Radez <dradez@redhat.com> - 0.1.5-1
+* Tue May 07 2019 Dan Radez <dradez@redhat.com> - 0.1.6-1
+- Updated to 0.1.6
+
+* Tue Apr 02 2019 Dan Radez <dradez@redhat.com> - 0.1.5-1
 - Updated to 0.1.5
 - added %check
+
 * Wed Mar 20 2019 Dan Radez <dradez@redhat.com> - 0.1.1-1
 - Initial package.
