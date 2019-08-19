@@ -4,7 +4,7 @@
 
 Name:           python-%{pypi_name}
 Version:        0.1.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Abstraction and Python API for Ansible Networking
 
 License:        ASL 2.0
@@ -72,6 +72,9 @@ LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 %{_sysconfdir}/ansible/roles/%{ansible_role}/
 
 %changelog
+* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.1.7-2
+- Rebuilt for Python 3.8
+
 * Mon Aug 19 2019 Dan Radez <dradez@redhat.com> - 0.1.7-1
 - Updated to 0.1.7
 
