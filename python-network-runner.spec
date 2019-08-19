@@ -4,7 +4,7 @@
 
 Name:           python-%{pypi_name}
 Version:        0.1.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Abstraction and Python API for Ansible Networking
 
 License:        ASL 2.0
@@ -76,6 +76,9 @@ LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 %{_sysconfdir}/ansible/roles/%{ansible_role}/
 
 %changelog
+* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.1.6-3
+- Rebuilt for Python 3.8
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
