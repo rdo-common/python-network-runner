@@ -3,8 +3,8 @@
 %global ansible_role network-runner
 
 Name:           python-%{pypi_name}
-Version:        0.1.6
-Release:        3%{?dist}
+Version:        0.1.7
+Release:        1%{?dist}
 Summary:        Abstraction and Python API for Ansible Networking
 
 License:        ASL 2.0
@@ -57,10 +57,6 @@ rm -rf %{pypi_name}.egg-info
 %install
 %py3_install
 
-# Move ansible role to proper location
-install -d -m 755 %{buildroot}%{_sysconfdir}/ansible/roles
-mv etc/ansible/roles/%{ansible_role} %{buildroot}%{_sysconfdir}/ansible/roles
-
 %check
 LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 
@@ -76,6 +72,9 @@ LANG=C.utf-8 %{__python3} -m pytest --ignore=build
 %{_sysconfdir}/ansible/roles/%{ansible_role}/
 
 %changelog
+* Mon Aug 19 2019 Dan Radez <dradez@redhat.com> - 0.1.7-1
+- Updated to 0.1.7
+
 * Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.1.6-3
 - Rebuilt for Python 3.8
 
