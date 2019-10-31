@@ -1,3 +1,14 @@
+# Macros for py2/py3 compatibility
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global pyver %{python3_pkgversion}
+%else
+%global pyver 2
+%endif
+%global pyver_bin python%{pyver}
+%global pyver_sitelib %python%{pyver}_sitelib
+%global pyver_install %py%{pyver}_install
+%global pyver_build %py%{pyver}_build
+# End of macros for py2/py3 compatibility
 # Created by pyp2rpm-3.2.2
 %global pypi_name network-runner
 %global ansible_role network-runner
@@ -13,25 +24,25 @@ Source0:        https://github.com/ansible-network/%{pypi_name}/archive/%{versio
 BuildArch:      noarch
 
 BuildRequires: ansible >= 2.6
-BuildRequires:  python3-devel
-BuildRequires:  python3dist(ansible-runner)
-BuildRequires:  python3dist(mock)
-BuildRequires:  python3dist(pytest)
+BuildRequires:  python%{pyver}-devel
+BuildRequires:  python%{pyver}-ansible-runner
+BuildRequires:  python%{pyver}-mock
+BuildRequires:  python%{pyver}-pytest
 
 %description
 Network Runner is a set of ansible roles and python library that
 abstracts Ansible Networking operations. It interfaces
 programatically through ansible-runner.
 
-%package -n     python3-%{pypi_name}
+%package -n     python%{pyver}-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{pypi_name}}
+%{?python_provide:%python_provide python%{pyver}-%{pypi_name}}
 
-Requires:       python3dist(ansible-runner)
+Requires:       python%{pyver}-ansible-runner
 # Python code cannot work without the ansible roles
 Requires:  ansible-role-%{ansible_role} = %{version}-%{release}
 
-%description -n python3-%{pypi_name}
+%description -n python%{pyver}-%{pypi_name}
 Network Runner is a set of ansible roles and python library that
 abstracts Ansible Networking operations. It interfaces
 programatically through ansible-runner.
@@ -52,19 +63,19 @@ Role for Python Network Runner Library
 rm -rf %{pypi_name}.egg-info
 
 %build
-%py3_build
+%{pyver_build}
 
 %install
-%py3_install
+%{pyver_install}
 
 %check
-LANG=C.utf-8 %{__python3} -m pytest --ignore=build
+LANG=C.utf-8 %{pyver_bin} -m pytest --ignore=build
 
-%files -n python3-%{pypi_name}
+%files -n python%{pyver}-%{pypi_name}
 %license LICENSE
 %doc README.rst
-%{python3_sitelib}/network_runner
-%{python3_sitelib}/network_runner-%{version}-py?.?.egg-info
+%{pyver_sitelib}/network_runner
+%{pyver_sitelib}/network_runner-%{version}-py?.?.egg-info
 
 %files -n ansible-role-%{ansible_role}
 %license LICENSE
